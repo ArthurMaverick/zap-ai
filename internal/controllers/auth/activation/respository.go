@@ -31,6 +31,12 @@ func (r *repository) ActivationRepository(input *model.EntityUsers) (*model.Enti
 		return &users, <-errorCode
 	}
 
+	db.Debug().Select("Active").Where("activation = ?", input.Active).Take(&users)
+
+	if users.Active {
+		errorCode <- "ACTIVATION_ACTIVE_400"
+		return &users, <-errorCode
+	}
 	users.Active = input.Active
 	users.UpdatedAt = time.Now().Local()
 

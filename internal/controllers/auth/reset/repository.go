@@ -35,13 +35,13 @@ func (r *repository) ResetRepository(input *model.EntityUsers) (*model.EntityUse
 	}
 
 	if !users.Active {
-		errorCode <- "RESET_NOT_ACTIVE_403"
+		errorCode <- "ACCOUNT_NOT_ACTIVE_403"
 		return &users, <-errorCode
 	}
 
 	encryptedPassword, err := bcrypt.HashPassword(input.Password)
 	if err != nil {
-		errorCode <- "RESET_ENCRYPTED_PASSWORD_400"
+		errorCode <- "RESET_PASSWORD_FAILED_403"
 		return &users, <-errorCode
 	}
 

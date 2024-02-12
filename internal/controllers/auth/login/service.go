@@ -5,7 +5,7 @@ import (
 )
 
 type Service interface {
-	LoginService(input *InputLogin)
+	LoginService(input *InputLogin) (*model.EntityUsers, string)
 }
 
 type service struct {

@@ -39,13 +39,13 @@ func (r *repository) ForgotRepository(input *model.EntityUsers) (*model.EntityUs
 	}
 
 	if !users.Active {
-		errorCode <- "FORGOT_NOT_ACTIVE_400"
+		errorCode <- "FORGOT_NOT_ACTIVE_403"
 		return &users, <-errorCode
 	}
 
 	changePassword := db.Debug().Select("password", "updated_at").Where("email = ?", input.Email).Updates(users)
 	if changePassword.Error != nil {
-		errorCode <- "FORGOT_FAILED_403"
+		errorCode <- "FORGOT_PASSWORD_FAILED_403"
 		return &users, <-errorCode
 	} else {
 		errorCode <- "nil"

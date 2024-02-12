@@ -26,7 +26,7 @@ type ErrorResponse struct {
 }
 
 // APIResponse is a function to handle response
-func APIResponse(ctx gin.Context, Data interface{}, StatusCode int, Message, Method string) {
+func APIResponse(ctx *gin.Context, Message string, StatusCode int, Method string, Data interface{}) {
 
 	jsonResponse := Responses{
 		StatusCode: StatusCode,
