@@ -10,7 +10,7 @@ type service struct {
 	repository Repository
 }
 
-func NewService(repository Repository) *service {
+func NewServiceResend(repository Repository) *service {
 	return &service{
 		repository: repository,
 	}

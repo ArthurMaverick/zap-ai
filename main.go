@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/ArthurMaverick/zap-ai/internal/configs"
 	route "github.com/ArthurMaverick/zap-ai/internal/routes"
 	"github.com/ArthurMaverick/zap-ai/pkg/env"
 	"github.com/ArthurMaverick/zap-ai/pkg/logger"
@@ -24,6 +25,11 @@ func main() {
 }
 
 func SetupRouter() *gin.Engine {
+	db, err := configs.Connection()
+	if err != nil {
+		slog.Error(err.Error())
+	}
+
 	router := gin.Default()
 
 	goEnv, err := env.GodoEnv("GO_ENV")
@@ -46,6 +52,6 @@ func SetupRouter() *gin.Engine {
 	router.Use(helmet.Default())
 	router.Use(gzip.Gzip(gzip.BestCompression))
 
-	route.InitAuthRoutes()
-
+	route.InitAuthRoutes(db, router)
+	return router
 }

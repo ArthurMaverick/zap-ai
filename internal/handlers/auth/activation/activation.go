@@ -13,7 +13,7 @@ type handler struct {
 	service activation.Service
 }
 
-func NewHandler(service activation.Service) *handler {
+func NewHandlerActivation(service activation.Service) *handler {
 	return &handler{service: service}
 }
 

@@ -15,7 +15,7 @@ func SendGridMail(name, email, subject, fileName, token string) (*rest.Response,
 		"to":    email,
 		"token": token,
 	})
-	sendgridAPIKey, err := env.GodoEnv("SENDGRID_API_KEY")
+	sendgridAPIKey, err := env.GodoEnv("SG_API_KEY")
 	if err != nil {
 		return nil, err
 	}
